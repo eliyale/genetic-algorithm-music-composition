@@ -1,3 +1,6 @@
+cotton='cbcabcabcbcdabcabcabcacbafefabcabcabcabcbcdabcabcabcacbafa'
+all_a = 'aaaaaaaaaaaabaaaaaabaaaaaa'
+
 mid64='''\
 TVRoZAAAAAYAAQAGAJBNVHJrAAAAJwD/WAQEAhgIAP9ZAgAAAP9RAwfCOwD/BgpGaXNoLVBvbGth
 AP8vAE1UcmsAAANoAP8hAQAA/wMOQWNjb3JkaW9uIEhpZ2gAwRUAsQd/ALEKQAD/AQpGaXNoIFBv

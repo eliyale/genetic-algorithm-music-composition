@@ -5,6 +5,12 @@ import bitarray
 from midi_strings import *
 import string #for getting list of ascii characters for alphabet
 
+#TODO:
+#[ ] add functionality for multiple target strings, ie a guide set
+#		will just need to modify the fitness function, to sum the guide set distances
+#
+#
+
 #class to genetrate a string that resembles targetString using a genetic algorithm
 #with Nomralized Compression Distance as the Fitness function
 #Individuals are represented as chromosomes where their genes are a string and the fitness of that 
@@ -20,7 +26,7 @@ import string #for getting list of ascii characters for alphabet
     #    a value of 1, means all of parent 1 is taken, a value of 0.5 means the chromosome is crossed over halfway
     #    !!!!might not implement this, sounds comlicated
 class Generator():
-    def __init__(self, target, gene_set, generation_size = 30, n_reproduce = 2, mutation_rate = 0.8, crossover_rate = 0.5, iterations = 30):
+    def __init__(self, target, gene_set, generation_size = 30, n_reproduce = 2, mutation_rate = 0.7, crossover_rate = 0.5, iterations = 30):
         self.target = target
         self.target_string = ''.join(target)
         self.gene_set = gene_set
@@ -101,7 +107,7 @@ class chromosome():
 
         #convert list of whatever to a bit array for passing to the compressor
         gene_string = ''.join(self.genes)
-        print(gene_string:)
+        print(gene_string)
         gene_bit_array = bitarray.bitarray()
         gene_bit_array.frombytes(gene_string.encode('utf-8'))
         
@@ -115,11 +121,16 @@ class chromosome():
         C_y_x = len(compressor.compress(self.target_string+gene_string))
         C_y = len(compressor.compress(self.target_string))
 
-        ncd = max((C_x_y - C_x),(C_y_x - C_y))/max(C_x,C_y)
+        #compute normalized compression distance as given in https://ieeexplore.ieee.org/document/4424858/
+        #ncd is between 0 and 1, values closer to 0 indicate similarity to the target, distances near 0 indicate dissimilarity
+        ncd = (max((C_x_y - C_x),(C_y_x - C_y)))/(max(C_x,C_y))
 
-        verbose_print("Nomralized Compression Distance:", ncd)
+        #we invert ncd so that values closer to zero are given a higher fitness value
+        fitness = 1/ncd
 
-        return ncd
+        verbose_print("Nomralized Compression Distance:", ncd, "fitness:, ", fitness)
+
+        return fitness
 
 
     def set_fitness(self, new_fitness):
@@ -134,10 +145,11 @@ if __name__ == '__main__':
     # print(data[0])
     # input()
 
-    target_string = mid64
+    target_string = all_a
 
     target = list(target_string)
-    alphabet = list(string.ascii_letters+string.digits)
+    #alphabet = list(string.ascii_letters+string.digits)
+    alphabet = list('abcdefg')
 
     # alphabet = ['a','b','c','d']
     # target = ['a','b','c','d','a','b','c','d','a','b','c','d','a','b','c','d']
@@ -152,7 +164,7 @@ if __name__ == '__main__':
     global verbose_print
     verbose_print = print if verbose else lambda *a, **k: None
 
-    generator = Generator(target, alphabet)
+    generator = Generator(target, alphabet, iterations = 500)
     generator.run()
 
 
