@@ -11,20 +11,19 @@ import string #for getting list of ascii characters for alphabet
 #
 #
 
-#class to genetrate a string that resembles targetString using a genetic algorithm
+#class to genetrate a list that resembles target using a genetic algorithm
 #with Nomralized Compression Distance as the Fitness function
 #Individuals are represented as chromosomes where their genes are a string and the fitness of that 
 #individual is the NCD calcualted for the string as shown below
 #
 #initalization parameters:
-    #target_string = string that the algorithm will attempt to replicate
-    #gene_set = string comprised of all the possible sharacters in the alphabet for target_strings
+    #target = list of items that the algorithm will attempt to replicate
+    #gene_set = list comprised of all the possible items in the alphabet for target
     #generation size = int for number of individuals in a generation
     #n_reporduce = int for the number fo individuals in a generation that will reporduce, (determined by highest fitness)
     #mutaion_rate = float for the rate at which individual mutations in the gene strings are introduced into the offspring
     #corssover_rate = float for the percentage of parent1 chromosome that is taken in the child,
     #    a value of 1, means all of parent 1 is taken, a value of 0.5 means the chromosome is crossed over halfway
-    #    !!!!might not implement this, sounds comlicated
 class Generator():
     def __init__(self, target, gene_set, generation_size = 30, n_reproduce = 2, mutation_rate = 0.7, crossover_rate = 0.5, iterations = 30):
         self.target = target
@@ -58,6 +57,7 @@ class Generator():
             #mutate the children according to the mutation rate
             children = self._mutate(children)
 
+            #concatenate lists of parents and children to form final generation, then repeate on the this generation
             self.generation = parents + children
 
             verbose_print("Generation:", i)
@@ -139,20 +139,11 @@ class chromosome():
 
 if __name__ == '__main__':
 
-    # with open("ex.txt", 'rb') as in_file:
-    # 	data = in_file.read()
-    # print(data)
-    # print(data[0])
-    # input()
-
     target_string = all_a
 
     target = list(target_string)
     #alphabet = list(string.ascii_letters+string.digits)
     alphabet = list('abcdefg')
-
-    # alphabet = ['a','b','c','d']
-    # target = ['a','b','c','d','a','b','c','d','a','b','c','d','a','b','c','d']
 
     parser = argparse.ArgumentParser(description='generate music with a genetic algorithm')
     #parser.add_argument('dataset', metavar='dataset', nargs=1, type=str)
