@@ -3,6 +3,10 @@ from playmidi import *
 from parsemidi import *
 import sys #for sys.exit
 
+
+#this is the main driver that will be used for demo pruposes.
+#it takes various command line arguments to interact with the program
+#to see useage details please refer to the readme doc
 if __name__ == '__main__':
 
 

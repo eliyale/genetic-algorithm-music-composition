@@ -71,11 +71,11 @@ class Generator():
         return self.generation[0].genes
 
 
-
+    #helper function to return a radom gene
     def _random_gene(self):
         return random.choices(self.gene_set, k = len(self.target))
 
-    #returns a new gene from random parents selected fron gene_pool
+    #returns a new gene from random parents selected from gene_pool
     def _crossover(self, gene_pool):
         parent1 = random.choice(gene_pool)
         parent2 = random.choice(gene_pool)
@@ -87,6 +87,8 @@ class Generator():
 
         return new_gene
 
+    #mutation function which flips one note to a random other note, at the given mutation rate
+    #note this function is applied to the entire generation simultaneousl
     def _mutate(self, gene_pool):
         for child in gene_pool:
             if random.randint(0,99) < (self.mutation_rate * 100):
@@ -98,8 +100,13 @@ class Generator():
 
 
 
-
-
+#this class represents a chromosome(individual) of the population. An individual is merely its genes, which is a list of strings,
+#and its fitness as described below. The individual also holds its target whcih is needed for calcualting fitness
+#
+#Iitialization Parameters:
+#	genes: the list of strings
+#	target: the list of strings it is targeting to compute fitness
+#	fitness: optionally a predetermined fitness can be given, but this is not used in the above algorithm
 class chromosome():
 	#note chromosome needs to know the target, in order to calculate its fitness
     def __init__(self, genes, target, fitness = 0,):
@@ -108,6 +115,10 @@ class chromosome():
         self.target_string = ''.join(target)
         self.fitness = self.compute_fitness()
 
+    #The function to Compute fitness for each individual. It is called upon initailation of a chromosome.
+    #The function compares the "differnece" between its current gene (string) and the target gene (string)
+    #The Normalized Information Distance is used with the LZ77 compression algorithm
+    #Please see the comments below for more details
     def compute_fitness(self):
         #compute using NCD
 
@@ -118,7 +129,6 @@ class chromosome():
         gene_bit_array.frombytes(gene_string.encode('utf-8'))
         
         compressor = Compressor()
-        compressed_data = compressor.compress(data=gene_string)
         
         verbose_print("length of data:", len(gene_string), " length of compression: ", len(compressed_data))
 

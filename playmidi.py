@@ -37,6 +37,7 @@ def play_music(music_file):
 def play_file(filename):
 
     music_file = filename
+    # the below code is included for legacy reasons
     # convert back to a binary midi and save to a file in the working directory
     # fish = base64.b64decode(mid64)
     # fout = open(music_file,"wb")
@@ -71,6 +72,9 @@ def save_song(midi_list):
 
     mid.save('generated_song.mid')
 
+#play a list of midi notes by saving the file, then calling the play_file method
+#note a file is created, list_song.mid, in order to play it, it is generally not needed
+#after execution of this function
 def play_list(midi_list):
     mid = MidiFile()
     track = MidiTrack()
