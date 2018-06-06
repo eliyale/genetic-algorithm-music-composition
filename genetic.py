@@ -25,7 +25,10 @@ import string #for getting list of ascii characters for alphabet
     #corssover_rate = float for the percentage of parent1 chromosome that is taken in the child,
     #    a value of 1, means all of parent 1 is taken, a value of 0.5 means the chromosome is crossed over halfway
 class Generator():
-    def __init__(self, target, gene_set, generation_size = 30, n_reproduce = 2, mutation_rate = 0.7, crossover_rate = 0.5, iterations = 30):
+    def __init__(self, target, gene_set, generation_size = 30, n_reproduce = 2, mutation_rate = 0.7, crossover_rate = 0.5, iterations = 30, verbose=False):
+        global verbose_print
+        verbose_print = print if verbose else lambda *a, **k: None
+
         self.target = target
         self.target_string = ''.join(target)
         self.gene_set = gene_set
@@ -63,6 +66,9 @@ class Generator():
             verbose_print("Generation:", i)
             for x in self.generation:
                 verbose_print("\tgenes:",x.genes, " fitness:", x.fitness)
+
+        #return the fittest individual
+        return self.generation[0].genes
 
 
 
@@ -107,7 +113,7 @@ class chromosome():
 
         #convert list of whatever to a bit array for passing to the compressor
         gene_string = ''.join(self.genes)
-        print(gene_string)
+        #print(gene_string)
         gene_bit_array = bitarray.bitarray()
         gene_bit_array.frombytes(gene_string.encode('utf-8'))
         
@@ -135,28 +141,6 @@ class chromosome():
 
     def set_fitness(self, new_fitness):
         self.fitness = new_fitness
-
-
-if __name__ == '__main__':
-
-    target_string = all_a
-
-    target = list(target_string)
-    #alphabet = list(string.ascii_letters+string.digits)
-    alphabet = list('abcdefg')
-
-    parser = argparse.ArgumentParser(description='generate music with a genetic algorithm')
-    #parser.add_argument('dataset', metavar='dataset', nargs=1, type=str)
-    parser.add_argument('--verbose', dest='x', action='store_const', const=True, default=False)
-
-    args = parser.parse_args()
-    verbose = args.x
-
-    global verbose_print
-    verbose_print = print if verbose else lambda *a, **k: None
-
-    generator = Generator(target, alphabet, iterations = 500)
-    generator.run()
 
 
 
