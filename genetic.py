@@ -128,7 +128,7 @@ class chromosome():
         C_y = len(compressor.compress(self.target_string))
 
         #compute normalized compression distance as given in https://ieeexplore.ieee.org/document/4424858/
-        #ncd is between 0 and 1, values closer to 0 indicate similarity to the target, distances near 0 indicate dissimilarity
+        #ncd is between 0 and 1, values closer to 0 indicate similarity to the target, distances near 1 indicate dissimilarity
         ncd = (max((C_x_y - C_x),(C_y_x - C_y)))/(max(C_x,C_y))
 
         #we invert ncd so that values closer to zero are given a higher fitness value
