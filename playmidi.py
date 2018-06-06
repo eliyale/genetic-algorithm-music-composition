@@ -66,7 +66,7 @@ def play_list(midi_list):
     mid.tracks.append(track)
     track.append(Message('program_change', program=12, time=0))
     for midi_note in midi_list:
-        track.append(Message('note_on', note=int(midi_note), velocity=110, time=128))
+        track.append(Message('note_on', note=int(midi_note), velocity=110, time=160))
         track.append(Message('note_off', note=int(midi_note), velocity=127, time=64))
 
     mid.save('generated_song.mid')

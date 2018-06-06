@@ -25,7 +25,7 @@ import string #for getting list of ascii characters for alphabet
     #corssover_rate = float for the percentage of parent1 chromosome that is taken in the child,
     #    a value of 1, means all of parent 1 is taken, a value of 0.5 means the chromosome is crossed over halfway
 class Generator():
-    def __init__(self, target, gene_set, generation_size = 30, n_reproduce = 2, mutation_rate = 0.7, crossover_rate = 0.5, iterations = 30, verbose=False):
+    def __init__(self, target, gene_set, generation_size = 30, n_reproduce = 2, mutation_rate = 0.9, crossover_rate = 0.5, iterations = 30, verbose=False):
         global verbose_print
         verbose_print = print if verbose else lambda *a, **k: None
 
