@@ -12,4 +12,15 @@ def parse_midi_file(filename):
 
 
 def parse_midi_input():
-	pass
+    midi_list = []
+    inport = mido.open_input()
+    note_count = 0
+    while(note_count <= 48):
+        msg = inport.receive()
+        print(msg)
+        if msg.type == 'note_on' and msg.velocity != 0:
+            midi_list.append(str(msg.note))
+            note_count = note_count + 1
+
+    return midi_list
+

@@ -8,7 +8,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='generate music with a genetic algorithm')
     #parser.add_argument('dataset', metavar='dataset', nargs=1, type=str)
     parser.add_argument('--verbose', dest='x', action='store_const', const=True, default=False)
-    parser.add_argument('--interact', dest='interact', action='store_const', const=True, default=True)
+    parser.add_argument('--interact', dest='interact', action='store_const', const=True, default=False)
     parser.add_argument('--train', dest='train', action='store_const', const=True, default=False)
     args = parser.parse_args()
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
     if args.interact:
         #read midi input
         #target = parse_midi_input()
-        target = parse_midi_file("midifiles/twinkle.mid")
+        target = parse_midi_input()
 
     else:
         target = parse_midi_file("midifiles/twinkle.mid")
@@ -36,6 +36,7 @@ if __name__ == '__main__':
     if args.train:
         generator = Generator(target, alphabet, iterations = 100, verbose=args.x, crossover_rate = 0.8)
         new_midi_list = generator.run()
+        save_song(new_midi_list)
     else:
         new_midi_list = parse_midi_file('generated_song.mid')
 
@@ -47,7 +48,7 @@ if __name__ == '__main__':
     input()
     play_list(random_song)
     input()
-    play_list(new_midi_list)
+    play_file('generated_song.mid')
 
     #play_file('midifiles/Africa.mid')
 
