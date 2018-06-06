@@ -1,6 +1,8 @@
 cotton='cbcabcabcbcdabcabcabcacbafefabcabcabcabcbcdabcabcabcacbafa'
 all_a = 'aaaaaaaaaaaabaaaaaabaaaaaa'
 
+best_twinkle = ['64', '69', '67', '52', '60', '55', '60', '48', '60', '67', '62', '67', '69', '53', '69', '62', '48', '67', '52', '67', '65', '53', '65', '64', '55', '64', '65', '60', '65', '64', '64', '64', '55', '64', '62', '55', '60', '48', '55', '65', '50', '67', '48', '64', '62', '53', '62', '62', '53', '62', '50', '64', '52', '67', '69', '53', '53', '69', '67', '52', '65', '50', '65', '64', '48', '62', '55', '65', '50']
+
 mid64='''\
 TVRoZAAAAAYAAQAGAJBNVHJrAAAAJwD/WAQEAhgIAP9ZAgAAAP9RAwfCOwD/BgpGaXNoLVBvbGth
 AP8vAE1UcmsAAANoAP8hAQAA/wMOQWNjb3JkaW9uIEhpZ2gAwRUAsQd/ALEKQAD/AQpGaXNoIFBv
