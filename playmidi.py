@@ -15,6 +15,7 @@ import pygame
 import base64
 from mido import Message, MidiFile, MidiTrack
 import random
+import time
 
 def play_music(music_file):
     """

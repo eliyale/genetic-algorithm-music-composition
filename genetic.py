@@ -129,13 +129,14 @@ class chromosome():
         gene_bit_array.frombytes(gene_string.encode('utf-8'))
         
         compressor = Compressor()
-        
-        verbose_print("length of data:", len(gene_string), " length of compression: ", len(compressed_data))
+       
 
         C_x_y = len(compressor.compress(gene_string+self.target_string))
         C_x = len(compressor.compress(gene_string))
         C_y_x = len(compressor.compress(self.target_string+gene_string))
         C_y = len(compressor.compress(self.target_string))
+
+        verbose_print("length of data:", len(gene_string), " length of compression: ", C_x)
 
         #compute normalized compression distance as given in https://ieeexplore.ieee.org/document/4424858/
         #ncd is between 0 and 1, values closer to 0 indicate similarity to the target, distances near 1 indicate dissimilarity
