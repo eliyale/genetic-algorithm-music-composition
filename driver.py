@@ -37,7 +37,7 @@ if __name__ == '__main__':
         verbose_print(alphabet)
 
     if args.train:
-        generator = Generator(target, alphabet, iterations = 50, verbose=args.x, crossover_rate = 0.8)
+        generator = Generator(target, alphabet, iterations = 1000, verbose=args.x, crossover_rate = 0.8)
         new_midi_list = generator.run()
         save_song(new_midi_list)
     else:
@@ -52,6 +52,7 @@ if __name__ == '__main__':
         input()
         play_list(random_song)
         input()
+        save_song(new_midi_list)
         play_file('generated_song.mid')
 
 
