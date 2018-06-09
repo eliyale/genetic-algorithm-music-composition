@@ -68,8 +68,8 @@ def save_song(midi_list):
     mid.tracks.append(track)
     track.append(Message('program_change', program=12, time=0))
     for midi_note in midi_list:
-        track.append(Message('note_on', note=int(midi_note), velocity=110, time=160))
-        track.append(Message('note_off', note=int(midi_note), velocity=127, time=64))
+        track.append(Message('note_on', note=int(midi_note), velocity=110, time=200))
+        track.append(Message('note_off', note=int(midi_note), velocity=127, time=48))
 
     mid.save('generated_song.mid')
 
@@ -82,8 +82,8 @@ def play_list(midi_list):
     mid.tracks.append(track)
     track.append(Message('program_change', program=12, time=0))  #program=12 is the marimba, 1 is piano
     for midi_note in midi_list:
-        track.append(Message('note_on', note=int(midi_note), velocity=110, time=160))
-        track.append(Message('note_off', note=int(midi_note), velocity=127, time=64))
+        track.append(Message('note_on', note=int(midi_note), velocity=110, time=200))
+        track.append(Message('note_off', note=int(midi_note), velocity=127, time=48))
 
     mid.save('list_song.mid')
     play_file('list_song.mid')

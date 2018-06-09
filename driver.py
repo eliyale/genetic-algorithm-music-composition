@@ -37,7 +37,7 @@ if __name__ == '__main__':
         verbose_print(alphabet)
 
     if args.train:
-        generator = Generator(target, alphabet, iterations = 1000, verbose=args.x, crossover_rate = 0.8)
+        generator = Generator(target, alphabet, iterations = 30, verbose=args.x, mutation_rate = 1)
         new_midi_list = generator.run()
         save_song(new_midi_list)
     else:
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         play_file('generated_song.mid')
 
 
-    if not args.interact and not args.play:
+    if not args.interact and not args.play and not args.train:
         print("please provide a mode\n\nusage: driver.py [--verbose] [--interact] [--train] [--play] filename")
 
 
